@@ -9,5 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "Twittereeze.h"
 
+@interface IFClickableImageView : NSImageView {}
+@end
+
 @interface NSKVONotifying_IFMainController (TwittereezePreferenceChanges)
 @end

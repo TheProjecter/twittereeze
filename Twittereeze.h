@@ -10,14 +10,25 @@
 #import <Foundation/Foundation.h>
 #import <objc/objc-class.h>
 
-@interface IFMainController : NSObject {}
+@interface IFMainController : NSObject {
+	NSWindow * notificationWindow;
+	NSWindow * preferenceWindow;
+}
+
 - (BOOL)canHideNotificationWindow;
 - (void)toggleWindow;
 - (void)showNotificationWindow:(id)fp8;
 @end
 
-@interface NSKVONotifying_IFMainController : NSObject {}
+@interface NSKVONotifying_IFMainController : NSObject {
+	NSWindow * notificationWindow;
+	NSWindow * preferenceWindow;
+}
+
 - (void)toggleWindow;
+@end
+
+@interface IFHUDWindow : NSPanel {}
 @end
 
 @interface Twittereeze : NSObject {}

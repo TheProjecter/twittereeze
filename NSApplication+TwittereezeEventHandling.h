@@ -11,9 +11,6 @@
 
 #import "Twittereeze.h"
 
-@interface IFHUDWindow : NSPanel {}
-@end
-
 @interface IFHUDTableView : NSTableView
 @end
 
