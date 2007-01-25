@@ -20,6 +20,10 @@
 @interface IFHUDBackground : NSView {}
 @end
 
+@interface NSApplication (TwittereezeEventHandlingPreSwizzle)
+- (void) _apple_sendEvent: (NSEvent *) event;
+@end
+
 @interface NSApplication (TwittereezeEventHandling)
 - (void) _twittereeze_sendEvent: (NSEvent *) event;
 - (void) handleStatusMessage: (NSEvent *) event;

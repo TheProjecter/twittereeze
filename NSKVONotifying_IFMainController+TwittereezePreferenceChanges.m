@@ -17,7 +17,7 @@
 	id notificationWindow = nil;
 	id preferenceSheet = nil;
 
-	while (object = [enumerator nextObject])
+	while (nil != (object = [enumerator nextObject]))
 		if ([object isKindOfClass:[IFHUDWindow class]])
 			notificationWindow = object;
 
@@ -29,12 +29,13 @@
 	enumerator = [[[preferenceSheet contentView] subviews] objectEnumerator];
 
 	id twitterrificBannerImageView = nil;
-	while (object = [enumerator nextObject])
-		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
+	while (nil != (object = [enumerator nextObject]))
+		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]])) {
 			if ([object tag] == TwittereezeBadgeImageViewTag) // make sure we only have /one/ badge
 				twitterrificBannerImageView = nil;
 			else
 				twitterrificBannerImageView = object;
+		}
 
 	if (twitterrificBannerImageView != nil) {
 		NSRect twittereezeBadgeImageFrame = [twitterrificBannerImageView frame];

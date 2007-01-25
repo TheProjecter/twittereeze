@@ -12,5 +12,10 @@
 @interface IFClickableImageView : NSImageView {}
 @end
 
+@interface NSKVONotifying_IFMainController (TwittereezePreferenceChangesPreSwizzle)
+- (IBAction) _twitterrific_showPreferenceWindow: (id) sender;
+@end
+
 @interface NSKVONotifying_IFMainController (TwittereezePreferenceChanges)
+- (IBAction) _twittereeze_showPreferenceWindow: (id) sender;
 @end

@@ -47,7 +47,7 @@
 		id object;
 		id textField = nil;
 
-		while (object = [enumerator nextObject])
+		while (nil != (object = [enumerator nextObject]))
 			if ([object isKindOfClass:[IFHUDTextField class]])
 				textField = object;
 
@@ -67,7 +67,7 @@
 		id object;
 		id textField = nil;
 
-		while (object = [enumerator nextObject])
+		while (nil != (object = [enumerator nextObject]))
 			if ([object isKindOfClass:[IFHUDTextField class]])
 				textField = object;
 
@@ -89,13 +89,13 @@
 	id notificationWindow = nil;
 	id textField = nil;
 
-	while (object = [enumerator nextObject])
+	while (nil != (object = [enumerator nextObject]))
 		if ([object isKindOfClass:[IFHUDWindow class]]) {
 			notificationWindow = object;
 
 			enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
 
-			while (object = [enumerator nextObject])
+			while (nil != (object = [enumerator nextObject]))
 				if ([object isKindOfClass:[IFHUDTextField class]])
 					textField = object;
 		}
@@ -114,7 +114,7 @@
 
 	NSAppleScript * script;
 
-	while (object = [enumerator nextObject]) {
+	while (nil != (object = [enumerator nextObject])) {
 		if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"]) {
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"iChat\" to set status message to \"" stringByAppendingString:statusMessage]
@@ -149,7 +149,7 @@ OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * u
 	id notificationWindow = nil;
 	id textField = nil;
 
-	while (object = [enumerator nextObject])
+	while (nil != (object = [enumerator nextObject]))
 		if ([object isKindOfClass:[IFHUDWindow class]]) {
 			notificationWindow = object;
 
@@ -160,7 +160,7 @@ OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * u
 
 				NSEnumerator * enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
 
-				while (object = [enumerator nextObject])
+				while (nil != (object = [enumerator nextObject]))
 					if ([object isKindOfClass:[IFHUDTextField class]]) {
 						textField = object;
 						[textField setDelegate:NSApp];
