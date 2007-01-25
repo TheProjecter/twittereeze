@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5F4484FF0B632F30003CE8DC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4484FE0B632F30003CE8DC /* Carbon.framework */; };
-		5F4747FE0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4747FD0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m */; };
+		5F4747FE0B60FF8F00E380BB /* NSApplication+PostNibLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */; };
 		5F4F7D4A0B0D24C80071E33A /* Twittereeze.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F7D490B0D24C80071E33A /* Twittereeze.m */; };
-		5F9CE2680B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */; };
-		5FF2AD370B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */; };
+		5FF2AD370B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -23,14 +22,12 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF630370AF2F00C91783 /* Twittereeze_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twittereeze_Prefix.pch; sourceTree = "<group>"; };
 		5F4484FE0B632F30003CE8DC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		5F4747FC0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+TwittereezeEventHandling.h"; sourceTree = "<group>"; };
-		5F4747FD0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+TwittereezeEventHandling.m"; sourceTree = "<group>"; };
+		5F4747FC0B60FF8F00E380BB /* NSApplication+PostNibLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+PostNibLoad.h"; sourceTree = "<group>"; };
+		5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+PostNibLoad.m"; sourceTree = "<group>"; };
 		5F4F7D480B0D24C80071E33A /* Twittereeze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twittereeze.h; sourceTree = "<group>"; };
 		5F4F7D490B0D24C80071E33A /* Twittereeze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twittereeze.m; sourceTree = "<group>"; };
-		5F9CE2660B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h"; sourceTree = "<group>"; };
-		5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m"; sourceTree = "<group>"; };
-		5FF2AD350B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFHUDTextField+TwittereezeShortcuts.h"; sourceTree = "<group>"; };
-		5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IFHUDTextField+TwittereezeShortcuts.m"; sourceTree = "<group>"; };
+		5FF2AD350B63C15F004C1B49 /* IFHUDTextField+Shortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFHUDTextField+Shortcuts.h"; sourceTree = "<group>"; };
+		5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IFHUDTextField+Shortcuts.m"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Twittereeze.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twittereeze.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -84,12 +81,10 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5F4747FC0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.h */,
-				5F4747FD0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m */,
-				5FF2AD350B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.h */,
-				5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */,
-				5F9CE2660B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h */,
-				5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */,
+				5F4747FC0B60FF8F00E380BB /* NSApplication+PostNibLoad.h */,
+				5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */,
+				5FF2AD350B63C15F004C1B49 /* IFHUDTextField+Shortcuts.h */,
+				5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -199,9 +194,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4F7D4A0B0D24C80071E33A /* Twittereeze.m in Sources */,
-				5F4747FE0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m in Sources */,
-				5FF2AD370B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m in Sources */,
-				5F9CE2680B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m in Sources */,
+				5F4747FE0B60FF8F00E380BB /* NSApplication+PostNibLoad.m in Sources */,
+				5FF2AD370B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

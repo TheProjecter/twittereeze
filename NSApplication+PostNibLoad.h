@@ -1,5 +1,5 @@
 //
-//  NSApplication+TwittereezeEventHandling.h
+//  NSApplication+PostNibLoad.h
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 19/01/07.
@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
-
-#import "Twittereeze.h"
 
 @interface IFHUDWindow : NSPanel {}
 @end
@@ -23,7 +21,13 @@
 @interface IFHUDBackground : NSView {}
 @end
 
-@interface NSApplication (TwittereezeEventHandling)
+@interface IFMainController : NSObject {}
+- (BOOL)canHideNotificationWindow;
+- (void)toggleWindow;
+- (void)showNotificationWindow:(id)fp8;
+@end
+
+@interface NSApplication (PostNibLoad)
 - (void) _twittereeze_sendEvent: (NSEvent *) event;
 - (void) handleStatusMessage: (NSEvent *) event;
 

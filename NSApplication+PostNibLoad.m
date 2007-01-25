@@ -1,14 +1,14 @@
 //
-//  NSApplication+TwittereezeEventHandling.m
+//  NSApplication+PostNibLoad.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 19/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "NSApplication+TwittereezeEventHandling.h"
+#import "NSApplication+PostNibLoad.h"
 
-@implementation NSApplication (TwittereezeEventHandling)
+@implementation NSApplication (PostNibLoad)
 + (void) load {
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterWindowUpdate:)
