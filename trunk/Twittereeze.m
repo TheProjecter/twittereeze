@@ -27,7 +27,8 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
  */
 + (void) load
 {
-	Twittereeze * twittereeze = [Twittereeze sharedInstance];
+	// We don't currently use the shared instance, so no need to create or assign it either
+	// Twittereeze * twittereeze = [Twittereeze sharedInstance];
 
 	id swizzle_nsap = [NSApplication class];
 	DTRenameSelector(swizzle_nsap, @selector(sendEvent:), @selector (_apple_sendEvent:));
@@ -41,13 +42,13 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
 /**
  * @return the single static instance of the plugin object
  */
-+ (Twittereeze *) sharedInstance
-{
-	static Twittereeze * twittereeze = nil;
-
-	if (twittereeze == nil)
-		twittereeze = [[Twittereeze alloc] init];
-
-	return twittereeze;
-}
+//+ (Twittereeze *) sharedInstance
+//{
+//	static Twittereeze * twittereeze = nil;
+//
+//	if (twittereeze == nil)
+//		twittereeze = [[Twittereeze alloc] init];
+//
+//	return twittereeze;
+//}
 @end

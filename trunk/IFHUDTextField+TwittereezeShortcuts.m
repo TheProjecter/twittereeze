@@ -22,7 +22,7 @@
 	id object;
 	IFHUDTableView * tableView = nil;
 
-	while (object = [enumerator nextObject])
+	while (nil != (object = [enumerator nextObject]))
 		if (([object isKindOfClass:[IFHUDBackground class]]) && ([[[[object subviews] objectAtIndex:0] subviews] count] > 0))
 			tableView = [[[[[[object subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
 

@@ -11,8 +11,8 @@
 #import <objc/objc-class.h>
 
 @interface IFMainController : NSObject {
-	NSWindow * notificationWindow;
-	NSWindow * preferenceWindow;
+//	NSWindow * notificationWindow;
+//	NSWindow * preferenceWindow;
 }
 
 - (BOOL)canHideNotificationWindow;
@@ -21,8 +21,8 @@
 @end
 
 @interface NSKVONotifying_IFMainController : NSObject {
-	NSWindow * notificationWindow;
-	NSWindow * preferenceWindow;
+//	NSWindow * notificationWindow;
+//	NSWindow * preferenceWindow;
 }
 
 - (void)toggleWindow;
@@ -32,5 +32,5 @@
 @end
 
 @interface Twittereeze : NSObject {}
-+ (Twittereeze *) sharedInstance;
+//+ (Twittereeze *) sharedInstance;
 @end
