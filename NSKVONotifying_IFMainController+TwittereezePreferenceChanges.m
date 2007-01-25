@@ -8,6 +8,8 @@
 
 #import "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h"
 
+#define TwittereezeBadgeImageViewTag 28832100
+
 @implementation NSKVONotifying_IFMainController (TwittereezePreferenceChanges)
 - (IBAction) _twittereeze_showPreferenceWindow: (id) sender {
 	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
@@ -28,8 +30,11 @@
 
 	id twitterrificBannerImageView = nil;
 	while (object = [enumerator nextObject])
-		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))//[[object image] size].width == 340.0))
-			twitterrificBannerImageView = object;
+		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
+			if ([object tag] == TwittereezeBadgeImageViewTag) // make sure we only have /one/ badge
+				twitterrificBannerImageView = nil;
+			else
+				twitterrificBannerImageView = object;
 
 	if (twitterrificBannerImageView != nil) {
 		NSRect twittereezeBadgeImageFrame = [twitterrificBannerImageView frame];
@@ -37,6 +42,7 @@
 			[[NSBundle bundleForClass:[Twittereeze class]] pathForResource:@"Twittereeze_badge" ofType:@"png"]];
 		NSImageView * twittereezeBadgeImageView = [[NSImageView alloc] initWithFrame:twittereezeBadgeImageFrame];
 		[twittereezeBadgeImageView setImage:twittereezeBadgeImage];
+		[twittereezeBadgeImageView setTag:TwittereezeBadgeImageViewTag];
 		[[preferenceSheet contentView] addSubview:twittereezeBadgeImageView];
 	}
 }
