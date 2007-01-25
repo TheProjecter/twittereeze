@@ -11,6 +11,12 @@
 #import <objc/objc-class.h>
 
 @interface IFMainController : NSObject {}
+- (BOOL)canHideNotificationWindow;
+- (void)toggleWindow;
+- (void)showNotificationWindow:(id)fp8;
+@end
+
+@interface NSKVONotifying_IFMainController : NSObject {}
 - (void)toggleWindow;
 @end
 

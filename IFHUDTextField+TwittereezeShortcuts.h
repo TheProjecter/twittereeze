@@ -1,5 +1,5 @@
 //
-//  IFHUDTextField+Shortcuts.h
+//  IFHUDTextField+TwittereezeShortcuts.h
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 21/01/07.
@@ -11,11 +11,11 @@
 @interface IFHUDBackground : NSView {}
 @end
 
-@interface IFHUDTableView : NSTableView
+@interface IFHUDTableView : NSTableView {}
 @end
 
 @interface IFHUDTextField : NSTextField {}
 @end
 
-@interface IFHUDTextField (Shortcuts)
+@interface IFHUDTextField (TwittereezeShortcuts)
 @end

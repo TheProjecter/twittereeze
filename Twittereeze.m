@@ -22,36 +22,20 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
 	return YES;
 }
 
-+ (void) install {
-	NSLog(@"1");
-}
-
 /**
  * A special method called by SIMBL once the application has started and all classes are initialized.
  */
 + (void) load
 {
-	NSLog(@"%@", [NSApp delegate]);
-//	[NSApp setDelegate:nil];
 	Twittereeze * twittereeze = [Twittereeze sharedInstance];
 
 	id swizzle_nsap = [NSApplication class];
 	DTRenameSelector(swizzle_nsap, @selector(sendEvent:), @selector (_apple_sendEvent:));
 	DTRenameSelector(swizzle_nsap, @selector(_twittereeze_sendEvent:), @selector(sendEvent:));
 
-	id swizzle_ifmc = [IFMainController class];
-	DTRenameSelector(swizzle_ifmc, @selector(showPreferenceWindow:), @selector (_twitterrific_showPreferenceWindow:));
-	DTRenameSelector(swizzle_ifmc, @selector(_twittereeze_showPreferenceWindow:), @selector(showPreferenceWindow:));
-
-	id swizzle_kvon_ifmc = [[NSApp delegate] class];
+	id swizzle_kvon_ifmc = [NSKVONotifying_IFMainController class];
 	DTRenameSelector(swizzle_kvon_ifmc, @selector(showPreferenceWindow:), @selector (_twitterrific_showPreferenceWindow:));
 	DTRenameSelector(swizzle_kvon_ifmc, @selector(_twittereeze_showPreferenceWindow:), @selector(showPreferenceWindow:));
-
-//	id swizzle_kvon_ifmc = [NSKVONotifying_IFMainController class];
-//	DTRenameSelector(swizzle_kvon_ifmc, @selector(showPreferenceWindow:), @selector (_twitterrific_showPreferenceWindow:));
-//	DTRenameSelector(swizzle_kvon_ifmc, @selector(_twittereeze_showPreferenceWindow:), @selector(showPreferenceWindow:));
-
-//	NSLog(@"Twittereeze is running.");
 }
 
 /**
