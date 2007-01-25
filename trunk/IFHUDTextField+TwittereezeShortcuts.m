@@ -1,14 +1,14 @@
 //
-//  IFHUDTextField+Shortcuts.m
+//  IFHUDTextField+TwittereezeShortcuts.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 21/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "IFHUDTextField+Shortcuts.h"
+#import "IFHUDTextField+TwittereezeShortcuts.h"
 
-@implementation IFHUDTextField (Shortcuts)
+@implementation IFHUDTextField (TwittereezeShortcuts)
 - (void) keyUp: (NSEvent *) event {
 	if (! ([event modifierFlags] & NSControlKeyMask) )
 		return;

@@ -1,29 +1,21 @@
 //
-//  NSApplication+PostNibLoad.m
+//  NSApplication+TwittereezeEventHandling.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 19/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "NSApplication+PostNibLoad.h"
-#import "TwittereezePosingMainController.h"
+#import "NSApplication+TwittereezeEventHandling.h"
 
-
-@implementation NSApplication (PostNibLoad)
+@implementation NSApplication (TwittereezeEventHandling)
 + (void) load {
-//	NSLog(@"%@", [NSApp delegate]);
-	[[NSNotificationCenter defaultCenter] addObserver:self
-		selector:@selector(replaceApplicationDelegate:)
-		name:@"NSApplicationDidFinishLaunchingNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterWindowUpdate:)
 		name:@"NSWindowDidUpdateNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterTableSelectionChange:)
 		name:@"NSTableViewSelectionDidChangeNotification" object:nil];
-//	[[NSNotificationCenter defaultCenter] addObserver:self
-//		selector:@selector(logNotifications:) name:nil object:nil];
 
 	// key codes: http://www.prefab.com/player/docs/frontier/a3advancedtopics.html
 	// kudos to: http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
@@ -43,28 +35,6 @@
 	hotKeyID.signature='htk2';
 	hotKeyID.id=2;
 	RegisterEventHotKey(103, cmdKey+shiftKey, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef);
-}
-
-+ (void) replaceApplicationDelegate: (NSNotification *) notification {
-//	[TwittereezePosingMainController poseAsClass:[IFMainController class]];
-//	IFMainController * twittereezeMainController = [[IFMainController alloc] init];
-
-//	[foo set
-	NSLog(@"%@ %@", [NSApp delegate], [[NSApp delegate] class]);
-//	NSLog(@"%@ %@", twittereezeMainController, [twittereezeMainController class]);
-//	[[NSApp delegate] showPreferenceWindow:nil];
-//	[twittereezeMainController showPreferenceWindow:nil];
-
-//	[IFMainController newMethod];
-//	[[NSApp delegate] newMethod];
-//	[twittereezeMainController newMethod];
-
-//	[NSApp setDelegate:twittereezeMainController];
-//	NSLog(@"%@ %@", [NSApp delegate], [[NSApp delegate] class]);
-}
-
-+ (void) logNotifications: (NSNotification *) notification {
-	NSLog(@"%@", notification);
 }
 
 + (void) makeTextFieldFirstResponderAfterWindowUpdate: (NSNotification *) notification {
