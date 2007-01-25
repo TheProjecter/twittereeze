@@ -10,6 +10,8 @@
 		5F4484FF0B632F30003CE8DC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4484FE0B632F30003CE8DC /* Carbon.framework */; };
 		5F4747FE0B60FF8F00E380BB /* NSApplication+PostNibLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */; };
 		5F4F7D4A0B0D24C80071E33A /* Twittereeze.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F7D490B0D24C80071E33A /* Twittereeze.m */; };
+		5F9CE2680B6733900042F3BC /* IFMainController+TweakPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CE2670B6733900042F3BC /* IFMainController+TweakPreferences.m */; };
+		5F9CE27D0B67544F0042F3BC /* TwittereezePosingMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CE27C0B67544F0042F3BC /* TwittereezePosingMainController.m */; };
 		5FF2AD370B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -26,6 +28,10 @@
 		5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+PostNibLoad.m"; sourceTree = "<group>"; };
 		5F4F7D480B0D24C80071E33A /* Twittereeze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twittereeze.h; sourceTree = "<group>"; };
 		5F4F7D490B0D24C80071E33A /* Twittereeze.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twittereeze.m; sourceTree = "<group>"; };
+		5F9CE2660B6733900042F3BC /* IFMainController+TweakPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFMainController+TweakPreferences.h"; sourceTree = "<group>"; };
+		5F9CE2670B6733900042F3BC /* IFMainController+TweakPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IFMainController+TweakPreferences.m"; sourceTree = "<group>"; };
+		5F9CE27B0B67544F0042F3BC /* TwittereezePosingMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwittereezePosingMainController.h; sourceTree = "<group>"; };
+		5F9CE27C0B67544F0042F3BC /* TwittereezePosingMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwittereezePosingMainController.m; sourceTree = "<group>"; };
 		5FF2AD350B63C15F004C1B49 /* IFHUDTextField+Shortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFHUDTextField+Shortcuts.h"; sourceTree = "<group>"; };
 		5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IFHUDTextField+Shortcuts.m"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Twittereeze.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twittereeze.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +91,10 @@
 				5F4747FD0B60FF8F00E380BB /* NSApplication+PostNibLoad.m */,
 				5FF2AD350B63C15F004C1B49 /* IFHUDTextField+Shortcuts.h */,
 				5FF2AD360B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m */,
+				5F9CE2660B6733900042F3BC /* IFMainController+TweakPreferences.h */,
+				5F9CE2670B6733900042F3BC /* IFMainController+TweakPreferences.m */,
+				5F9CE27B0B67544F0042F3BC /* TwittereezePosingMainController.h */,
+				5F9CE27C0B67544F0042F3BC /* TwittereezePosingMainController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -196,6 +206,8 @@
 				5F4F7D4A0B0D24C80071E33A /* Twittereeze.m in Sources */,
 				5F4747FE0B60FF8F00E380BB /* NSApplication+PostNibLoad.m in Sources */,
 				5FF2AD370B63C15F004C1B49 /* IFHUDTextField+Shortcuts.m in Sources */,
+				5F9CE2680B6733900042F3BC /* IFMainController+TweakPreferences.m in Sources */,
+				5F9CE27D0B67544F0042F3BC /* TwittereezePosingMainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
