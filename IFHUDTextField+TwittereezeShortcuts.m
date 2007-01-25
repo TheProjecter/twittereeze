@@ -10,9 +10,12 @@
 
 @implementation IFHUDTextField (TwittereezeShortcuts)
 - (void) keyUp: (NSEvent *) event {
-	if (! ([event modifierFlags] & NSControlKeyMask) )
+	unsigned int modifierFlags = [event modifierFlags];
+	unsigned short keyCode = [event keyCode];
+
+	if ((! (modifierFlags & NSControlKeyMask) ) && (! (modifierFlags & NSAlternateKeyMask)))
 		return;
-	if (([event keyCode] < 125) || ([event keyCode] > 126))
+	if ((keyCode < 125) || (keyCode > 126))
 		return;
 
 	NSEnumerator * enumerator = [[[self superview] subviews] objectEnumerator];
@@ -29,17 +32,28 @@
 	if ([tableView numberOfRows] == 0)
 		return;
 
-	int row = [tableView selectedRow];
+	int row = -1;
 
-	switch ([event keyCode]) {
+	switch (keyCode) {
 	case 125: // down arrow key
-		row++; // one row lower
-		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+		if (modifierFlags & NSControlKeyMask)
+			// one row lower
+			row = ([tableView selectedRow] + 1);
+		else if (modifierFlags & NSAlternateKeyMask)
+			// very bottom
+			row = ([tableView numberOfRows] - 1);
 		break;
 	case 126: // up arrow key
-		row--; // one row higher
-		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+		if (modifierFlags & NSControlKeyMask)
+			// one row higher
+			row = ([tableView selectedRow] - 1);
+		else if (modifierFlags & NSAlternateKeyMask)
+			// very top
+			row = 0;
 		break;
 	}
+
+	if (row != -1)
+		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 }
 @end
