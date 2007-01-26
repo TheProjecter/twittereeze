@@ -84,6 +84,15 @@
 }
 
 - (void) handleStatusMessage: (NSEvent *) event {
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	
+	BOOL changeAdiumStatus = [defaults boolForKey:@"changeAdiumStatus"];
+	BOOL changeiChatStatus = [defaults boolForKey:@"changeiChatStatus"];
+	BOOL changeSkypeStatus = [defaults boolForKey:@"changeSkypeStatus"];
+
+	if ((!changeAdiumStatus) && (!changeiChatStatus) && (!changeSkypeStatus))
+		return;
+
 	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
 	id object;
 	id notificationWindow = nil;
@@ -115,21 +124,24 @@
 	NSAppleScript * script;
 
 	while (nil != (object = [enumerator nextObject])) {
-		if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"]) {
+		if ((changeiChatStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"])) {
+			NSLog(@"about to change iChat's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"iChat\" to set status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];
 			[script executeAndReturnError:nil];
 			[script release];
 		}
-		else if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Skype"]) {
+		else if ((changeSkypeStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Skype"])) {
+			NSLog(@"about to change Skype's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Skype\" to send command \"SET PROFILE MOOD_TEXT " stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\" script name \"Twittereeze\""]];
 			[script executeAndReturnError:nil];
 			[script release];
 		}
-		else if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Adium"]) {
+		else if ((changeAdiumStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Adium"])) {
+			NSLog(@"about to change Adium's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Adium\" to set my status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];

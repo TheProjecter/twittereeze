@@ -27,6 +27,15 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
  */
 + (void) load
 {
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+//			[NSNumber numberWithInt:0], @"displayUnit",
+//			[NSNumber numberWithFloat:2.0], @"frequency",
+//			[NSNumber numberWithFloat:13.0], @"fontSize",
+			[NSNumber numberWithBool:YES], @"changeAdiumStatus",
+			[NSNumber numberWithBool:YES], @"changeiChatStatus",
+			[NSNumber numberWithBool:YES], @"changeSkypeStatus",
+		nil]];
+
 	// We don't currently use the shared instance, so no need to create or assign it either
 	// Twittereeze * twittereeze = [Twittereeze sharedInstance];
 
