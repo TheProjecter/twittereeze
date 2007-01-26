@@ -7,6 +7,7 @@
 //
 
 #import "NSApplication+TwittereezeEventHandling.h"
+#import "NearExponentialValueTransformer.h"
 
 @implementation NSApplication (TwittereezeEventHandling)
 + (void) load {
@@ -16,6 +17,12 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterTableSelectionChange:)
 		name:@"NSTableViewSelectionDidChangeNotification" object:nil];
+//	[[NSNotificationCenter defaultCenter] addObserver:self
+//		selector:@selector(notifyChangedDefaults:)
+//		name:@"NSUserDefaultsDidChangeNotification" object:nil];
+
+	NearExponentialValueTransformer * nearExponentialValueTransformer = [[[NearExponentialValueTransformer alloc] init] autorelease];
+    [NSValueTransformer setValueTransformer:nearExponentialValueTransformer forName:@"NearExponentialValueTransformer"];
 
 	// key codes: http://www.prefab.com/player/docs/frontier/a3advancedtopics.html
 	// kudos to: http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
@@ -55,6 +62,10 @@
 			[window makeFirstResponder:textField];
 	}
 }
+
+//+ (void) notifyChangedDefaults: (NSNotification *) notification {
+//	NSLog(@"%@", [[notification object] valueForKey:@"refreshInterval"]);
+//}
 
 + (void) makeTextFieldFirstResponderAfterTableSelectionChange: (NSNotification *) notification {
 	id tableView;

@@ -28,12 +28,10 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
 + (void) load
 {
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-//			[NSNumber numberWithInt:0], @"displayUnit",
-//			[NSNumber numberWithFloat:2.0], @"frequency",
-//			[NSNumber numberWithFloat:13.0], @"fontSize",
 			[NSNumber numberWithBool:YES], @"changeAdiumStatus",
 			[NSNumber numberWithBool:YES], @"changeiChatStatus",
 			[NSNumber numberWithBool:YES], @"changeSkypeStatus",
+			[NSNumber numberWithBool:YES], @"animateNotificationWindow", // currently unused, see below
 		nil]];
 
 	// We don't currently use the shared instance, so no need to create or assign it either
@@ -59,5 +57,20 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
 //		twittereeze = [[Twittereeze alloc] init];
 //
 //	return twittereeze;
+//}
+
+// For the future: a CI ripple effect for the notification window, as requested by 'abb'
+// place this so it somehow gets executed right before the notification window is supposed to show up
+
+// Something like below:
+
+//if (animateNotificationWindow) {
+//	CIImage * beforeImage = [[CIImage alloc] initWithBitmapImageRep:
+//		[notificationWindow bitmapImageRepForCachingDisplayInRect:[notificationWindow frame]]];
+//
+//	CIFilter * transformFilter = [CIFilter filterWithName:@"CIRippleTransition"];
+//	[transformFilter setValue:beforeImage forKey:@"inputImage"];
+//
+//	CIImage * afterImage = [transformFilter valueForKey:@"outputImage"];
 //}
 @end

@@ -54,6 +54,8 @@
 //			NSLog(@"%@ %@ %@", object, [object stringValue], NSStringFromRect([object frame]));
 
 //		NSLog(@"%@ %f", [object class], [object frame].origin.y);
+		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 209.0)
+			refreshPopupButton = object;
 
 		if (viewFrame.origin.y == 55.0) { // move copyright and version up a little
 			viewFrame.origin.y += (11.0 + 8.0);
@@ -66,8 +68,6 @@
 		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
 			twitterrificBannerImageView = object;
 		//NSLog(@"%@ %f", [object class], [object frame].origin.y);
-		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 254.0)
-			refreshPopupButton = object;
 	}
 
 	if (refreshPopupButton != nil)
@@ -157,9 +157,15 @@
 }
 
 - (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view {
-	// FIXME: doesn't get nor set actual defaults value (bindings? manually?)
 	NSSlider * refreshSlider = [[NSSlider alloc] initWithFrame:[refreshPopupButton frame]];
 	[[refreshSlider cell] setControlSize:[[refreshPopupButton cell] controlSize]];
+
+	[refreshSlider setMinValue:log(60.0)];
+	[refreshSlider setMaxValue:log(3600.0)];
+
+	[refreshSlider bind:@"value" toObject:[NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.refreshInterval"
+		options:[NSDictionary dictionaryWithObject:@"NearExponentialValueTransformer" forKey:NSValueTransformerNameBindingOption]];
 
 	[refreshPopupButton removeFromSuperview]; 
 	[view addSubview:refreshSlider];
