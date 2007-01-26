@@ -38,12 +38,13 @@
 	enumerator = [[[preferenceSheet contentView] subviews] objectEnumerator];
 
 	id twitterrificBannerImageView = nil;
+	id refreshPopupButton = nil;
 
 	while (nil != (object = [enumerator nextObject])) {
 		NSRect viewFrame = [object frame];
 
-		if ([object isKindOfClass:[NSTextField class]])
-			NSLog(@"%@ %@ %@", object, [object stringValue], NSStringFromRect([object frame]));
+//		if ([object isKindOfClass:[NSTextField class]])
+//			NSLog(@"%@ %@ %@", object, [object stringValue], NSStringFromRect([object frame]));
 
 
 		if (viewFrame.origin.y != 13.0) {
@@ -52,18 +53,16 @@
 		}
 		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
 			twitterrificBannerImageView = object;
+		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 228.0)
+			refreshPopupButton = object;
 	}
 
-	if (twitterrificBannerImageView != nil)
-		[self _twittereeze_addBadgeImageToView:[preferenceSheet contentView]
-			onTopOfBannerImageViewFrame:[twitterrificBannerImageView frame]];
-
+	if (refreshPopupButton != nil)
+		[self _twittereeze_substituteRefreshPopupButton:refreshPopupButton withRefreshSliderInView:[preferenceSheet contentView]];
+	[self _twittereeze_addCopyrightAndVersionTextFieldsToView:[preferenceSheet contentView]];
 //
 //		[preferenceSheet setContentView:twitterrificBannerImageView];
 //		[preferenceSheet setFrame:[twitterrificBannerImageView frame] display:YES animate:YES];
-
-	[self _twittereeze_addCopyrightAndVersionTextFieldsToView:[preferenceSheet contentView]];
-
 
 //		[[preferenceSheet contentView] setTag:TwittereezePreferenceSheetContentViewTag];
 
@@ -77,15 +76,29 @@
 	preferenceSheetFrame.size.height += (11.0 + 8.0);
 	preferenceSheetFrame.origin.y -= (11.0 + 8.0);
 	[preferenceSheet setFrame:preferenceSheetFrame display:YES animate:YES];
+
+	if (twitterrificBannerImageView != nil)
+		[self _twittereeze_addBadgeImageToView:[preferenceSheet contentView]
+			onTopOfBannerImageViewFrame:[twitterrificBannerImageView frame]];
 }
 
 - (void) _twittereeze_addBadgeImageToView: (NSView *) view onTopOfBannerImageViewFrame: (NSRect) twitterrificBannerImageViewFrame {
 	NSImage * twittereezeBadgeImage = [[NSImage alloc] initWithContentsOfFile:
 		[[NSBundle bundleForClass:[Twittereeze class]] pathForResource:@"Twittereeze_badge" ofType:@"png"]];
 	NSImageView * twittereezeBadgeImageView = [[NSImageView alloc] initWithFrame:twitterrificBannerImageViewFrame];
+
 	[twittereezeBadgeImageView setImage:twittereezeBadgeImage];
 	[twittereezeBadgeImageView setTag:TwittereezeBadgeImageViewTag];
+
 	[view addSubview:twittereezeBadgeImageView];
+}
+
+- (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view {
+	NSSlider * refreshSlider = [[NSSlider alloc] initWithFrame:[refreshPopupButton frame]];
+	[[refreshSlider cell] setControlSize:[[refreshPopupButton cell] controlSize]];
+	NSLog(@"%@", [refreshPopupButton title]);
+	[refreshPopupButton removeFromSuperview]; 
+	[view addSubview:refreshSlider];
 }
 
 - (void) _twittereeze_addCopyrightAndVersionTextFieldsToView: (NSView *) view {
