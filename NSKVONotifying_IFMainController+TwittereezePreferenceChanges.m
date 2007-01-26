@@ -14,6 +14,8 @@
 
 @implementation NSKVONotifying_IFMainController (TwittereezePreferenceChanges)
 - (IBAction) _twittereeze_showPreferenceWindow: (id) sender {
+//	NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+
 	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
 	id object;
 	id notificationWindow = nil;
@@ -63,7 +65,7 @@
 		}
 		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
 			twitterrificBannerImageView = object;
-		NSLog(@"%@ %f", [object class], [object frame].origin.y);
+		//NSLog(@"%@ %f", [object class], [object frame].origin.y);
 		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 254.0)
 			refreshPopupButton = object;
 	}
@@ -143,9 +145,15 @@
 	[externalApplicationCheckboxesLabel setFont:smallControlFont];
 	[adiumButton setFont:smallControlFont]; [iChatButton setFont:smallControlFont]; [skypeButton setFont:smallControlFont];
 
+	[adiumButton bind:@"value" toObject:[NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.changeAdiumStatus" options:nil];
+	[iChatButton bind:@"value" toObject:[NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.changeiChatStatus" options:nil];
+	[skypeButton bind:@"value" toObject:[NSUserDefaultsController sharedUserDefaultsController]
+		withKeyPath:@"values.changeSkypeStatus" options:nil];
+
 	[view addSubview:externalApplicationCheckboxesLabel];
 	[view addSubview:adiumButton]; [view addSubview:iChatButton]; [view addSubview:skypeButton];
-	NSLog(@"%@", view);
 }
 
 - (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view {
