@@ -18,6 +18,7 @@
 	id object;
 	id notificationWindow = nil;
 	id preferenceSheet = nil;
+	id view = nil;
 
 	while (nil != (object = [enumerator nextObject]))
 		if ([object isKindOfClass:[IFHUDWindow class]])
@@ -31,11 +32,15 @@
 	if (preferenceSheet == nil)
 		return;
 
+	view = [preferenceSheet contentView];
+
+	[view setNeedsDisplay:NO];
+
 	// if the badge exists, we've already altered the view
-	if ([[preferenceSheet contentView] viewWithTag:TwittereezeBadgeImageViewTag] != nil)
+	if ([view viewWithTag:TwittereezeBadgeImageViewTag] != nil)
 		return;
 
-	enumerator = [[[preferenceSheet contentView] subviews] objectEnumerator];
+	enumerator = [[view subviews] objectEnumerator];
 
 	id twitterrificBannerImageView = nil;
 	id refreshPopupButton = nil;
@@ -46,20 +51,27 @@
 //		if ([object isKindOfClass:[NSTextField class]])
 //			NSLog(@"%@ %@ %@", object, [object stringValue], NSStringFromRect([object frame]));
 
+//		NSLog(@"%@ %f", [object class], [object frame].origin.y);
 
-		if (viewFrame.origin.y != 13.0) {
+		if (viewFrame.origin.y == 55.0) { // move copyright and version up a little
 			viewFrame.origin.y += (11.0 + 8.0);
+			[object setFrame:viewFrame];
+		}
+		else if (viewFrame.origin.y != 13.0) { // move almost everything, except for the bottom buttons, up a lot
+			viewFrame.origin.y += (11.0 + 8.0 + 18.0 + 8.0 + 13.0 + 8.0);
 			[object setFrame:viewFrame];
 		}
 		if (([object isKindOfClass:[NSImageView class]]) && (! [object isKindOfClass:[IFClickableImageView class]]))
 			twitterrificBannerImageView = object;
-		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 228.0)
+		NSLog(@"%@ %f", [object class], [object frame].origin.y);
+		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 254.0)
 			refreshPopupButton = object;
 	}
 
 	if (refreshPopupButton != nil)
-		[self _twittereeze_substituteRefreshPopupButton:refreshPopupButton withRefreshSliderInView:[preferenceSheet contentView]];
-	[self _twittereeze_addCopyrightAndVersionTextFieldsToView:[preferenceSheet contentView]];
+		[self _twittereeze_substituteRefreshPopupButton:refreshPopupButton withRefreshSliderInView:view];
+	[self _twittereeze_addNotifyExternalApplicationCheckboxesToView:view];
+	[self _twittereeze_addCopyrightAndVersionTextFieldsToView:view];
 //
 //		[preferenceSheet setContentView:twitterrificBannerImageView];
 //		[preferenceSheet setFrame:[twitterrificBannerImageView frame] display:YES animate:YES];
@@ -73,13 +85,14 @@
 //	NSLog(@"%f %f", [preferenceSheet frame].size.height, [[preferenceSheet contentView] frame].size.height);
 
 	NSRect preferenceSheetFrame = [preferenceSheet frame];
-	preferenceSheetFrame.size.height += (11.0 + 8.0);
-	preferenceSheetFrame.origin.y -= (11.0 + 8.0);
+	preferenceSheetFrame.size.height += (11.0 + 8.0 + 18.0 + 8.0 + 13.0 + 8.0);
+	preferenceSheetFrame.origin.y -= (11.0 + 8.0 + 18.0 + 8.0 + 13.0 + 8.0);
 	[preferenceSheet setFrame:preferenceSheetFrame display:YES animate:YES];
 
 	if (twitterrificBannerImageView != nil)
-		[self _twittereeze_addBadgeImageToView:[preferenceSheet contentView]
-			onTopOfBannerImageViewFrame:[twitterrificBannerImageView frame]];
+		[self _twittereeze_addBadgeImageToView:view onTopOfBannerImageViewFrame:[twitterrificBannerImageView frame]];
+
+	[view setNeedsDisplay:YES];
 }
 
 - (void) _twittereeze_addBadgeImageToView: (NSView *) view onTopOfBannerImageViewFrame: (NSRect) twitterrificBannerImageViewFrame {
@@ -93,10 +106,53 @@
 	[view addSubview:twittereezeBadgeImageView];
 }
 
+- (void) _twittereeze_addNotifyExternalApplicationCheckboxesToView: (NSView *) view {
+	NSFont * smallControlFont = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
+
+	// buttom padding, bottom button height, copyright/version fields' heights and paddings
+	float buttonY = 13.0 + 28.0 + 14.0 +  11.0 + 8.0 + 11.0 + 8.0;
+
+	// FIXME: y and width aren't proper
+	NSTextField * externalApplicationCheckboxesLabel = [[NSTextField alloc] initWithFrame:
+		NSMakeRect(17.0, buttonY + 18.0 + 8.0, 180.0, 13.0)];
+	NSButton * adiumButton = [[NSButton alloc] initWithFrame:
+		NSMakeRect(17.0 + 12.0, buttonY, 60.0, 18.0)];
+	NSButton * iChatButton = [[NSButton alloc] initWithFrame:
+		NSMakeRect((17.0 + 12.0 + [adiumButton frame].size.width + 8.0), buttonY, 60.0, 18.0)];
+	NSButton * skypeButton = [[NSButton alloc] initWithFrame:
+		NSMakeRect((17.0 + 12.0 + [adiumButton frame].size.width + 8.0 + [iChatButton frame].size.width + 8.0), buttonY, 60.0, 18.0)];
+
+	[externalApplicationCheckboxesLabel setStringValue:@"If running, change status of:"];
+	[adiumButton setTitle:@"Adium"];
+	[iChatButton setTitle:@"iChat"];
+	[skypeButton setTitle:@"Skype"];
+
+	[externalApplicationCheckboxesLabel setBezeled:NO]; [externalApplicationCheckboxesLabel setBordered:NO];
+	[externalApplicationCheckboxesLabel setDrawsBackground:NO];
+	[externalApplicationCheckboxesLabel setEditable:NO]; [externalApplicationCheckboxesLabel setEnabled:NO];
+
+	[adiumButton setButtonType:NSSwitchButton];
+	[iChatButton setButtonType:NSSwitchButton];
+	[skypeButton setButtonType:NSSwitchButton];
+
+	[[externalApplicationCheckboxesLabel cell] setControlSize:NSSmallControlSize];
+	[[adiumButton cell] setControlSize:NSSmallControlSize];
+	[[iChatButton cell] setControlSize:NSSmallControlSize];
+	[[skypeButton cell] setControlSize:NSSmallControlSize];
+
+	[externalApplicationCheckboxesLabel setFont:smallControlFont];
+	[adiumButton setFont:smallControlFont]; [iChatButton setFont:smallControlFont]; [skypeButton setFont:smallControlFont];
+
+	[view addSubview:externalApplicationCheckboxesLabel];
+	[view addSubview:adiumButton]; [view addSubview:iChatButton]; [view addSubview:skypeButton];
+	NSLog(@"%@", view);
+}
+
 - (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view {
+	// FIXME: doesn't get nor set actual defaults value (bindings? manually?)
 	NSSlider * refreshSlider = [[NSSlider alloc] initWithFrame:[refreshPopupButton frame]];
 	[[refreshSlider cell] setControlSize:[[refreshPopupButton cell] controlSize]];
-	NSLog(@"%@", [refreshPopupButton title]);
+
 	[refreshPopupButton removeFromSuperview]; 
 	[view addSubview:refreshSlider];
 }
