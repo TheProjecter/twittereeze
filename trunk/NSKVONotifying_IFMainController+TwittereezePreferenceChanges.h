@@ -20,6 +20,7 @@
 - (IBAction) _twittereeze_showPreferenceWindow: (id) sender;
 
 - (void) _twittereeze_addBadgeImageToView: (NSView *) view onTopOfBannerImageViewFrame: (NSRect) twitterrificBannerImageViewFrame;
+- (void) _twittereeze_addNotifyExternalApplicationCheckboxesToView: (NSView *) view;
 - (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view;
 - (void) _twittereeze_addCopyrightAndVersionTextFieldsToView: (NSView *) view;
 @end
