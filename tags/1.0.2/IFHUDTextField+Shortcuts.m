@@ -1,14 +1,14 @@
 //
-//  IFHUDTextField+TwittereezeShortcuts.m
+//  IFHUDTextField+Shortcuts.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 21/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "IFHUDTextField+TwittereezeShortcuts.h"
+#import "IFHUDTextField+Shortcuts.h"
 
-@implementation IFHUDTextField (TwittereezeShortcuts)
+@implementation IFHUDTextField (Shortcuts)
 - (void) keyUp: (NSEvent *) event {
 	unsigned int modifierFlags = [event modifierFlags];
 	unsigned short keyCode = [event keyCode];
@@ -22,7 +22,7 @@
 	id object;
 	IFHUDTableView * tableView = nil;
 
-	while (nil != (object = [enumerator nextObject]))
+	while (object = [enumerator nextObject])
 		if (([object isKindOfClass:[IFHUDBackground class]]) && ([[[[object subviews] objectAtIndex:0] subviews] count] > 0))
 			tableView = [[[[[[object subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];
 
