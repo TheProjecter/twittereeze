@@ -27,50 +27,24 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
  */
 + (void) load
 {
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithBool:YES], @"changeAdiumStatus",
-			[NSNumber numberWithBool:YES], @"changeiChatStatus",
-			[NSNumber numberWithBool:YES], @"changeSkypeStatus",
-			[NSNumber numberWithBool:YES], @"animateNotificationWindow", // currently unused, see below
-		nil]];
-
-	// We don't currently use the shared instance, so no need to create or assign it either
-	// Twittereeze * twittereeze = [Twittereeze sharedInstance];
+	Twittereeze * twittereeze = [Twittereeze sharedInstance];
 
 	id swizzle_nsap = [NSApplication class];
 	DTRenameSelector(swizzle_nsap, @selector(sendEvent:), @selector (_apple_sendEvent:));
 	DTRenameSelector(swizzle_nsap, @selector(_twittereeze_sendEvent:), @selector(sendEvent:));
-
-	id swizzle_kvon_ifmc = [NSKVONotifying_IFMainController class];
-	DTRenameSelector(swizzle_kvon_ifmc, @selector(showPreferenceWindow:), @selector (_twitterrific_showPreferenceWindow:));
-	DTRenameSelector(swizzle_kvon_ifmc, @selector(_twittereeze_showPreferenceWindow:), @selector(showPreferenceWindow:));
+//	NSLog(@"Twittereeze is running.");
 }
 
 /**
  * @return the single static instance of the plugin object
  */
-//+ (Twittereeze *) sharedInstance
-//{
-//	static Twittereeze * twittereeze = nil;
-//
-//	if (twittereeze == nil)
-//		twittereeze = [[Twittereeze alloc] init];
-//
-//	return twittereeze;
-//}
++ (Twittereeze *) sharedInstance
+{
+	static Twittereeze * twittereeze = nil;
 
-// For the future: a CI ripple effect for the notification window, as requested by 'abb'
-// place this so it somehow gets executed right before the notification window is supposed to show up
+	if (twittereeze == nil)
+		twittereeze = [[Twittereeze alloc] init];
 
-// Something like below:
-
-//if (animateNotificationWindow) {
-//	CIImage * beforeImage = [[CIImage alloc] initWithBitmapImageRep:
-//		[notificationWindow bitmapImageRepForCachingDisplayInRect:[notificationWindow frame]]];
-//
-//	CIFilter * transformFilter = [CIFilter filterWithName:@"CIRippleTransition"];
-//	[transformFilter setValue:beforeImage forKey:@"inputImage"];
-//
-//	CIImage * afterImage = [transformFilter valueForKey:@"outputImage"];
-//}
+	return twittereeze;
+}
 @end

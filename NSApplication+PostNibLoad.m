@@ -1,15 +1,14 @@
 //
-//  NSApplication+TwittereezeEventHandling.m
+//  NSApplication+PostNibLoad.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 19/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "NSApplication+TwittereezeEventHandling.h"
-#import "NearExponentialValueTransformer.h"
+#import "NSApplication+PostNibLoad.h"
 
-@implementation NSApplication (TwittereezeEventHandling)
+@implementation NSApplication (PostNibLoad)
 + (void) load {
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterWindowUpdate:)
@@ -17,12 +16,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterTableSelectionChange:)
 		name:@"NSTableViewSelectionDidChangeNotification" object:nil];
-//	[[NSNotificationCenter defaultCenter] addObserver:self
-//		selector:@selector(notifyChangedDefaults:)
-//		name:@"NSUserDefaultsDidChangeNotification" object:nil];
-
-	NearExponentialValueTransformer * nearExponentialValueTransformer = [[[NearExponentialValueTransformer alloc] init] autorelease];
-    [NSValueTransformer setValueTransformer:nearExponentialValueTransformer forName:@"NearExponentialValueTransformer"];
 
 	// key codes: http://www.prefab.com/player/docs/frontier/a3advancedtopics.html
 	// kudos to: http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
@@ -54,7 +47,7 @@
 		id object;
 		id textField = nil;
 
-		while (nil != (object = [enumerator nextObject]))
+		while (object = [enumerator nextObject])
 			if ([object isKindOfClass:[IFHUDTextField class]])
 				textField = object;
 
@@ -62,10 +55,6 @@
 			[window makeFirstResponder:textField];
 	}
 }
-
-//+ (void) notifyChangedDefaults: (NSNotification *) notification {
-//	NSLog(@"%@", [[notification object] valueForKey:@"refreshInterval"]);
-//}
 
 + (void) makeTextFieldFirstResponderAfterTableSelectionChange: (NSNotification *) notification {
 	id tableView;
@@ -78,7 +67,7 @@
 		id object;
 		id textField = nil;
 
-		while (nil != (object = [enumerator nextObject]))
+		while (object = [enumerator nextObject])
 			if ([object isKindOfClass:[IFHUDTextField class]])
 				textField = object;
 
@@ -95,27 +84,18 @@
 }
 
 - (void) handleStatusMessage: (NSEvent *) event {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	
-	BOOL changeAdiumStatus = [defaults boolForKey:@"changeAdiumStatus"];
-	BOOL changeiChatStatus = [defaults boolForKey:@"changeiChatStatus"];
-	BOOL changeSkypeStatus = [defaults boolForKey:@"changeSkypeStatus"];
-
-	if ((!changeAdiumStatus) && (!changeiChatStatus) && (!changeSkypeStatus))
-		return;
-
 	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
 	id object;
 	id notificationWindow = nil;
 	id textField = nil;
 
-	while (nil != (object = [enumerator nextObject]))
+	while (object = [enumerator nextObject])
 		if ([object isKindOfClass:[IFHUDWindow class]]) {
 			notificationWindow = object;
 
 			enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
 
-			while (nil != (object = [enumerator nextObject]))
+			while (object = [enumerator nextObject])
 				if ([object isKindOfClass:[IFHUDTextField class]])
 					textField = object;
 		}
@@ -134,25 +114,22 @@
 
 	NSAppleScript * script;
 
-	while (nil != (object = [enumerator nextObject])) {
-		if ((changeiChatStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"])) {
-			NSLog(@"about to change iChat's status");
+	while (object = [enumerator nextObject]) {
+		if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"]) {
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"iChat\" to set status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];
 			[script executeAndReturnError:nil];
 			[script release];
 		}
-		else if ((changeSkypeStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Skype"])) {
-			NSLog(@"about to change Skype's status");
+		else if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Skype"]) {
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Skype\" to send command \"SET PROFILE MOOD_TEXT " stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\" script name \"Twittereeze\""]];
 			[script executeAndReturnError:nil];
 			[script release];
 		}
-		else if ((changeAdiumStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Adium"])) {
-			NSLog(@"about to change Adium's status");
+		else if ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Adium"]) {
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Adium\" to set my status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];
@@ -172,7 +149,7 @@ OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * u
 	id notificationWindow = nil;
 	id textField = nil;
 
-	while (nil != (object = [enumerator nextObject]))
+	while (object = [enumerator nextObject])
 		if ([object isKindOfClass:[IFHUDWindow class]]) {
 			notificationWindow = object;
 
@@ -183,7 +160,7 @@ OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * u
 
 				NSEnumerator * enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
 
-				while (nil != (object = [enumerator nextObject]))
+				while (object = [enumerator nextObject])
 					if ([object isKindOfClass:[IFHUDTextField class]]) {
 						textField = object;
 						[textField setDelegate:NSApp];
