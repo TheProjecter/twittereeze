@@ -18,10 +18,12 @@
 }
 
 - (id) transformedValue: (id) value {
+	NSLog(@"%f %f", [value floatValue], log([value floatValue]));
 	return [NSNumber numberWithFloat:log([value floatValue])];
 }
 
 - (id) reverseTransformedValue: (id) value {
+	NSLog(@"%f %f", [value floatValue], exp([value floatValue]));
 	return [NSNumber numberWithFloat:exp([value floatValue])];
 }
 @end

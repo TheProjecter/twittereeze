@@ -53,7 +53,9 @@
 		break;
 	}
 
-	if (row != -1)
+	if (row != -1) {
 		[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+		[tableView scrollRowToVisible:row];
+	}
 }
 @end
