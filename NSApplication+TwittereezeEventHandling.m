@@ -36,7 +36,7 @@
 		id textField = nil;
 
 		while (nil != (object = [enumerator nextObject]))
-			if ([object isKindOfClass:[IFHUDTextField class]])
+			if ([object isKindOfClass:[IFHUDTextField class]] && [object isEditable])
 				textField = object;
 
 		if ((textField != nil) && ([window isKeyWindow]) && ([[window firstResponder] class] != [NSTextView class]))
@@ -97,7 +97,7 @@
 			enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
 
 			while (nil != (object = [enumerator nextObject]))
-				if ([object isKindOfClass:[IFHUDTextField class]])
+				if ([object isKindOfClass:[IFHUDTextField class]] && [object isEditable])
 					textField = object;
 		}
 
