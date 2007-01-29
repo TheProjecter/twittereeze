@@ -165,7 +165,7 @@
 
 	[refreshSlider bind:@"value" toObject:[NSUserDefaultsController sharedUserDefaultsController]
 		withKeyPath:@"values.refreshInterval"
-		options:[NSDictionary dictionaryWithObject:@"NearExponentialValueTransformer" forKey:NSValueTransformerNameBindingOption]];
+		options:[NSDictionary dictionaryWithObject:@"ExponentialValueTransformer" forKey:NSValueTransformerNameBindingOption]];
 
 	[refreshPopupButton removeFromSuperview]; 
 	[view addSubview:refreshSlider];

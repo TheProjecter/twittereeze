@@ -7,7 +7,7 @@
 //
 
 #import "NSApplication+TwittereezeEventHandling.h"
-#import "NearExponentialValueTransformer.h"
+#import "ExponentialValueTransformer.h"
 
 @implementation NSApplication (TwittereezeEventHandling)
 + (void) load {
@@ -21,8 +21,8 @@
 //		selector:@selector(notifyChangedDefaults:)
 //		name:@"NSUserDefaultsDidChangeNotification" object:nil];
 
-	NearExponentialValueTransformer * nearExponentialValueTransformer = [[[NearExponentialValueTransformer alloc] init] autorelease];
-    [NSValueTransformer setValueTransformer:nearExponentialValueTransformer forName:@"NearExponentialValueTransformer"];
+	ExponentialValueTransformer * exponentialValueTransformer = [[[ExponentialValueTransformer alloc] init] autorelease];
+    [NSValueTransformer setValueTransformer:exponentialValueTransformer forName:@"ExponentialValueTransformer"];
 }
 
 + (void) makeTextFieldFirstResponderAfterWindowUpdate: (NSNotification *) notification {
