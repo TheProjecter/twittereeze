@@ -14,10 +14,12 @@
 
 @interface NSKVONotifying_IFMainController (TwittereezePreferenceChangesPreSwizzle)
 - (IBAction) _twitterrific_showPreferenceWindow: (id) sender;
+- (IBAction) _twitterrific_showNotificationWindow: (id) sender;
 @end
 
 @interface NSKVONotifying_IFMainController (TwittereezePreferenceChanges)
 - (IBAction) _twittereeze_showPreferenceWindow: (id) sender;
+- (IBAction) _twittereeze_showNotificationWindow: (id) sender;
 
 - (void) _twittereeze_addBadgeImageToView: (NSView *) view onTopOfBannerImageViewFrame: (NSRect) twitterrificBannerImageViewFrame;
 - (void) _twittereeze_addNotifyExternalApplicationCheckboxesToView: (NSView *) view;

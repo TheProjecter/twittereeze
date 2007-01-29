@@ -44,6 +44,8 @@ BOOL DTRenameSelector(Class _class, SEL _oldSelector, SEL _newSelector)
 	id swizzle_kvon_ifmc = [NSKVONotifying_IFMainController class];
 	DTRenameSelector(swizzle_kvon_ifmc, @selector(showPreferenceWindow:), @selector (_twitterrific_showPreferenceWindow:));
 	DTRenameSelector(swizzle_kvon_ifmc, @selector(_twittereeze_showPreferenceWindow:), @selector(showPreferenceWindow:));
+	DTRenameSelector(swizzle_kvon_ifmc, @selector(showNotificationWindow:), @selector (_twitterrific_showNotificationWindow:));
+	DTRenameSelector(swizzle_kvon_ifmc, @selector(_twittereeze_showNotificationWindow:), @selector(showNotificationWindow:));	
 }
 
 /**
