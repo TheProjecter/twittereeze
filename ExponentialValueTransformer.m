@@ -1,14 +1,14 @@
 //
-//  NearExponentialValueTransformer.m
+//  ExponentialValueTransformer.m
 //  Twittereeze
 //
 //  Created by Sören Kuklau on 26/01/07.
 //  Copyright 2007 chucker. All rights reserved.
 //
 
-#import "NearExponentialValueTransformer.h"
+#import "ExponentialValueTransformer.h"
 
-@implementation NearExponentialValueTransformer
+@implementation ExponentialValueTransformer
 + (Class) transformedValueClass {
 	return [NSNumber class];
 }

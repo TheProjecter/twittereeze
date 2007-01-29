@@ -12,7 +12,7 @@
 		5F4F7D4A0B0D24C80071E33A /* Twittereeze.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4F7D490B0D24C80071E33A /* Twittereeze.m */; };
 		5F9908070B68E6AF0059C5FF /* Twittereeze_badge.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F9908060B68E6AF0059C5FF /* Twittereeze_badge.png */; };
 		5F9CE2680B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */; };
-		5FC75EEA0B6AB57F00C74991 /* NearExponentialValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC75EE90B6AB57F00C74991 /* NearExponentialValueTransformer.m */; };
+		5FC75EEA0B6AB57F00C74991 /* ExponentialValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC75EE90B6AB57F00C74991 /* ExponentialValueTransformer.m */; };
 		5FF2AD370B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -32,8 +32,8 @@
 		5F9908060B68E6AF0059C5FF /* Twittereeze_badge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twittereeze_badge.png; sourceTree = "<group>"; };
 		5F9CE2660B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h"; sourceTree = "<group>"; };
 		5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m"; sourceTree = "<group>"; };
-		5FC75EE80B6AB57F00C74991 /* NearExponentialValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearExponentialValueTransformer.h; sourceTree = "<group>"; };
-		5FC75EE90B6AB57F00C74991 /* NearExponentialValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearExponentialValueTransformer.m; sourceTree = "<group>"; };
+		5FC75EE80B6AB57F00C74991 /* ExponentialValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialValueTransformer.h; sourceTree = "<group>"; };
+		5FC75EE90B6AB57F00C74991 /* ExponentialValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExponentialValueTransformer.m; sourceTree = "<group>"; };
 		5FF2AD350B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFHUDTextField+TwittereezeShortcuts.h"; sourceTree = "<group>"; };
 		5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IFHUDTextField+TwittereezeShortcuts.m"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Twittereeze.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Twittereeze.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,8 +96,8 @@
 				5FF2AD360B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m */,
 				5F9CE2660B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h */,
 				5F9CE2670B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m */,
-				5FC75EE80B6AB57F00C74991 /* NearExponentialValueTransformer.h */,
-				5FC75EE90B6AB57F00C74991 /* NearExponentialValueTransformer.m */,
+				5FC75EE80B6AB57F00C74991 /* ExponentialValueTransformer.h */,
+				5FC75EE90B6AB57F00C74991 /* ExponentialValueTransformer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 				5F4747FE0B60FF8F00E380BB /* NSApplication+TwittereezeEventHandling.m in Sources */,
 				5FF2AD370B63C15F004C1B49 /* IFHUDTextField+TwittereezeShortcuts.m in Sources */,
 				5F9CE2680B6733900042F3BC /* NSKVONotifying_IFMainController+TwittereezePreferenceChanges.m in Sources */,
-				5FC75EEA0B6AB57F00C74991 /* NearExponentialValueTransformer.m in Sources */,
+				5FC75EEA0B6AB57F00C74991 /* ExponentialValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
