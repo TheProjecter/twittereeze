@@ -23,25 +23,6 @@
 
 	NearExponentialValueTransformer * nearExponentialValueTransformer = [[[NearExponentialValueTransformer alloc] init] autorelease];
     [NSValueTransformer setValueTransformer:nearExponentialValueTransformer forName:@"NearExponentialValueTransformer"];
-
-	// key codes: http://www.prefab.com/player/docs/frontier/a3advancedtopics.html
-	// kudos to: http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/
-
-	EventHotKeyRef hotKeyRef;
-	EventHotKeyID hotKeyID;
-	EventTypeSpec eventType;
-	eventType.eventClass = kEventClassKeyboard;
-	eventType.eventKind = kEventHotKeyPressed;
-
-	InstallApplicationEventHandler(&HotKeyHandler, 1, &eventType, NULL, NULL);
-
-	hotKeyID.signature='htk1';
-	hotKeyID.id=1;
-	RegisterEventHotKey(103, cmdKey, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef);
-
-	hotKeyID.signature='htk2';
-	hotKeyID.id=2;
-	RegisterEventHotKey(103, cmdKey+shiftKey, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef);
 }
 
 + (void) makeTextFieldFirstResponderAfterWindowUpdate: (NSNotification *) notification {
@@ -160,40 +141,5 @@
 			[script release];
 		}
 	}
-}
-
-OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * userData) {
-	EventHotKeyID hkCom;
-	GetEventParameter(event, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(hkCom), NULL, &hkCom);
-	int keyID = hkCom.id;
-
-	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
-	id object;
-	id notificationWindow = nil;
-	id textField = nil;
-
-	while (nil != (object = [enumerator nextObject]))
-		if ([object isKindOfClass:[IFHUDWindow class]]) {
-			notificationWindow = object;
-
-			if ((keyID == 1) && ([notificationWindow isVisible])) // hide if toggle shortcut, and window visible
-				[notificationWindow performClose:nil];
-			else { // otherwise, open, make frontmost and put focus on text field
-				[(IFMainController *)[NSApp delegate] showNotificationWindow:nil];
-
-				NSEnumerator * enumerator = [[[notificationWindow contentView] subviews] objectEnumerator];
-
-				while (nil != (object = [enumerator nextObject]))
-					if ([object isKindOfClass:[IFHUDTextField class]]) {
-						textField = object;
-						[textField setDelegate:NSApp];
-						[NSApp activateIgnoringOtherApps:YES];
-						[notificationWindow makeKeyAndOrderFront:[NSApp delegate]];
-						[notificationWindow makeFirstResponder:textField];
-					}
-			}
-		}
-
-	return noErr;
 }
 @end

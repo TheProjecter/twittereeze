@@ -27,6 +27,4 @@
 @interface NSApplication (TwittereezeEventHandling)
 - (void) _twittereeze_sendEvent: (NSEvent *) event;
 - (void) handleStatusMessage: (NSEvent *) event;
-
-OSStatus HotKeyHandler(EventHandlerCallRef nextHandler, EventRef event, void * userData);
 @end
