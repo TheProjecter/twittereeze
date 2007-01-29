@@ -11,6 +11,12 @@
 
 @implementation NSApplication (TwittereezeEventHandling)
 + (void) load {
+//	[[NSNotificationCenter defaultCenter] addObserver:self
+//		selector:@selector(testWindowKey:)
+//		name:@"NSWindowDidBecomeKeyNotification" object:nil];
+//	[[NSNotificationCenter defaultCenter] addObserver:self
+//		selector:@selector(testWindowMain:)
+//		name:@"NSWindowDidBecomeMainNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 		selector:@selector(makeTextFieldFirstResponderAfterWindowUpdate:)
 		name:@"NSWindowDidUpdateNotification" object:nil];
@@ -25,6 +31,14 @@
     [NSValueTransformer setValueTransformer:exponentialValueTransformer forName:@"ExponentialValueTransformer"];
 }
 
+//+ (void) testWindowKey: (NSNotification *) notification {
+//	NSLog(@"key");
+//}
+//
+//+ (void) testWindowMain: (NSNotification *) notification {
+//	NSLog(@"main");
+//}
+
 + (void) makeTextFieldFirstResponderAfterWindowUpdate: (NSNotification *) notification {
 	id window;
 
@@ -34,13 +48,31 @@
 		NSEnumerator * enumerator = [[[window contentView] subviews] objectEnumerator];
 		id object;
 		id textField = nil;
+		id selectedTweetTextField = nil;
 
-		while (nil != (object = [enumerator nextObject]))
+		while (nil != (object = [enumerator nextObject])) {
 			if ([object isKindOfClass:[IFHUDTextField class]] && [object isEditable])
 				textField = object;
+			if (([object isKindOfClass:[IFHUDBackground class]]) &&
+				(! [[[object subviews] objectAtIndex:0] isKindOfClass:[NSScrollView class]])) {
+				enumerator = [[object subviews] objectEnumerator];
+
+				while (nil != (object = [enumerator nextObject])) {
+					NSLog(@"%@ %@", object, [object class]);
+					if ([object isKindOfClass:[NSTextField class]]) {
+						NSLog(@"got here");
+						selectedTweetTextField = object;
+						break;
+					}
+				}
+			}
+		}
 
 		if ((textField != nil) && ([window isKeyWindow]) && ([[window firstResponder] class] != [NSTextView class]))
 			[window makeFirstResponder:textField];
+
+		if (selectedTweetTextField != nil)
+			[self _twittereeze_removeEntitiesFromTweetField:selectedTweetTextField];
 	}
 }
 
@@ -58,13 +90,33 @@
 		NSEnumerator * enumerator = [[[[[[tableView superview] superview] superview] superview] subviews] objectEnumerator];
 		id object;
 		id textField = nil;
+		id selectedTweetTextField = nil;
 
-		while (nil != (object = [enumerator nextObject]))
+//		NSLog(@"%@", [[[[[tableView superview] superview] superview] superview] subviews]);
+
+		while (nil != (object = [enumerator nextObject])) {
 			if ([object isKindOfClass:[IFHUDTextField class]] && [object isEditable])
 				textField = object;
+			if (([object isKindOfClass:[IFHUDBackground class]]) &&
+				(! [[[object subviews] objectAtIndex:0] isKindOfClass:[NSScrollView class]])) {
+				enumerator = [[object subviews] objectEnumerator];
+
+				while (nil != (object = [enumerator nextObject])) {
+//					NSLog(@"%@ %@", object, [object class]);
+					if ([object isKindOfClass:[NSTextField class]]) {
+						NSLog(@"got here");
+						selectedTweetTextField = object;
+						break;
+					}
+				}
+			}
+		}
 
 		if ((textField != nil) && ([window isKeyWindow]) && ([[window firstResponder] class] != [NSTextView class]))
 			[window makeFirstResponder:textField];
+
+		if (selectedTweetTextField != nil)
+			[self _twittereeze_removeEntitiesFromTweetField:selectedTweetTextField];
 	}
 }
 
@@ -73,6 +125,17 @@
 		[self handleStatusMessage: event];
 
 	[self _apple_sendEvent:event];
+}
+
++ (void) _twittereeze_removeEntitiesFromTweetField: (NSTextField *) tweetField {
+	NSMutableString * editedTweet = [[tweetField stringValue] mutableCopy];
+
+	// NB: [editedTweet length] (and, by extension, the entire argument of range:) /cannot/ be optimized, as it changes each time
+
+	[editedTweet replaceOccurrencesOfString:@"&lt;" withString:@"<" options:0 range:NSMakeRange(0, [editedTweet length])];
+	[editedTweet replaceOccurrencesOfString:@"&gt;" withString:@">" options:0 range:NSMakeRange(0, [editedTweet length])];
+
+	[tweetField setStringValue:editedTweet];
 }
 
 - (void) handleStatusMessage: (NSEvent *) event {

@@ -6,6 +6,8 @@
 //  Copyright 2007 chucker. All rights reserved.
 //
 
+#import <QuartzCore/CIFilter.h>
+
 #import "NSKVONotifying_IFMainController+TwittereezePreferenceChanges.h"
 
 #define TwittereezeBadgeImageViewTag 28832100
@@ -54,7 +56,7 @@
 //			NSLog(@"%@ %@ %@", object, [object stringValue], NSStringFromRect([object frame]));
 
 //		NSLog(@"%@ %f", [object class], [object frame].origin.y);
-		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 209.0)
+		if ([object isKindOfClass:[NSPopUpButton class]] && [object frame].origin.y == 281.0)
 			refreshPopupButton = object;
 
 		if (viewFrame.origin.y == 55.0) { // move copyright and version up a little
@@ -157,7 +159,10 @@
 }
 
 - (void) _twittereeze_substituteRefreshPopupButton: (NSPopUpButton *) refreshPopupButton withRefreshSliderInView: (NSView *) view {
-	NSSlider * refreshSlider = [[NSSlider alloc] initWithFrame:[refreshPopupButton frame]];
+	NSRect sliderFrame = [refreshPopupButton frame];
+	sliderFrame.origin.x -= 80.0;
+
+	NSSlider * refreshSlider = [[NSSlider alloc] initWithFrame:sliderFrame];
 	[[refreshSlider cell] setControlSize:[[refreshPopupButton cell] controlSize]];
 
 	[refreshSlider setMinValue:log(60.0)];
@@ -195,5 +200,32 @@
 	[versionTextField setStringValue:[@"Version " stringByAppendingString:[[[NSBundle bundleForClass:[Twittereeze class]]
 		infoDictionary] objectForKey:@"CFBundleVersion"]]];
 	[view addSubview:versionTextField];
+}
+
+- (IBAction) _twittereeze_showNotificationWindow: (id) sender {
+	NSEnumerator * enumerator = [[NSApp windows] objectEnumerator];
+	id object;
+	id notificationWindow = nil;
+
+	while (nil != (object = [enumerator nextObject]))
+		if ([object isKindOfClass:[IFHUDWindow class]])
+			notificationWindow = object;
+
+	if (notificationWindow != nil) {
+		CIImage * beforeImage = [[CIImage alloc] initWithBitmapImageRep:
+			[[notificationWindow contentView] bitmapImageRepForCachingDisplayInRect:[notificationWindow frame]]];
+
+		CIFilter * transformFilter = [CIFilter filterWithName:@"CIRippleTransition"];
+		[transformFilter setValue:beforeImage forKey:@"inputImage"];
+
+		CIImage * afterImage = [[transformFilter attributes] valueForKey:@"outputImage"];
+
+//		NSLog(@"before: %@ filter: %@ after: %@", beforeImage, transformFilter, afterImage);
+	}
+//		NSLog(@"%@", [[notificationWindow contentView] bitmapImageRepForCachingDisplayInRect:[notificationWindow frame]]);
+
+//	NSLog(@"before %@", notificationWindow);
+	[self _twitterrific_showNotificationWindow:sender];
+//	NSLog(@"after");
 }
 @end
