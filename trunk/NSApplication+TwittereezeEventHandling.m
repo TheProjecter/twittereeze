@@ -60,7 +60,7 @@
 		id textField = nil;
 
 		while (nil != (object = [enumerator nextObject]))
-			if ([object isKindOfClass:[IFHUDTextField class]])
+			if ([object isKindOfClass:[IFHUDTextField class]] && [object isEditable])
 				textField = object;
 
 		if ((textField != nil) && ([window isKeyWindow]) && ([[window firstResponder] class] != [NSTextView class]))
@@ -117,7 +117,6 @@
 
 	while (nil != (object = [enumerator nextObject])) {
 		if ((changeiChatStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"iChat"])) {
-			NSLog(@"about to change iChat's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"iChat\" to set status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];
@@ -125,7 +124,6 @@
 			[script release];
 		}
 		else if ((changeSkypeStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Skype"])) {
-			NSLog(@"about to change Skype's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Skype\" to send command \"SET PROFILE MOOD_TEXT " stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\" script name \"Twittereeze\""]];
@@ -133,7 +131,6 @@
 			[script release];
 		}
 		else if ((changeAdiumStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Adium"])) {
-			NSLog(@"about to change Adium's status");
 			script = [[NSAppleScript alloc] initWithSource:
 				[[@"tell application \"Adium\" to set my status message to \"" stringByAppendingString:statusMessage]
 				stringByAppendingString:@"\""]];
