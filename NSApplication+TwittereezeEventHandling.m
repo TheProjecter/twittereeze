@@ -58,9 +58,9 @@
 				enumerator = [[object subviews] objectEnumerator];
 
 				while (nil != (object = [enumerator nextObject])) {
-					NSLog(@"%@ %@", object, [object class]);
+//					NSLog(@"%@ %@", object, [object class]);
 					if ([object isKindOfClass:[NSTextField class]]) {
-						NSLog(@"got here");
+//						NSLog(@"got here");
 						selectedTweetTextField = object;
 						break;
 					}
@@ -104,7 +104,7 @@
 				while (nil != (object = [enumerator nextObject])) {
 //					NSLog(@"%@ %@", object, [object class]);
 					if ([object isKindOfClass:[NSTextField class]]) {
-						NSLog(@"got here");
+//						NSLog(@"got here");
 						selectedTweetTextField = object;
 						break;
 					}
@@ -144,6 +144,7 @@
 	BOOL changeAdiumStatus = [defaults boolForKey:@"changeAdiumStatus"];
 	BOOL changeiChatStatus = [defaults boolForKey:@"changeiChatStatus"];
 	BOOL changeSkypeStatus = [defaults boolForKey:@"changeSkypeStatus"];
+	BOOL changeYahooStatus = YES;
 
 	if ((!changeAdiumStatus) && (!changeiChatStatus) && (!changeSkypeStatus))
 		return;
@@ -199,6 +200,11 @@
 				stringByAppendingString:@"\""]];
 			[script executeAndReturnError:nil];
 			[script release];
+		}
+		else if ((changeYahooStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Yahoo! Messenger"])) {
+			NSPasteboard * pasteboard = [NSPasteboard generalPasteboard];
+			[pasteboard setString:statusMessage forType:NSStringPboardType];
+			NSPerformService(@"Yahoo! Messenger/Set Selection as Status", pasteboard);
 		}
 	}
 }
