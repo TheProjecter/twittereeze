@@ -202,7 +202,9 @@
 			[script release];
 		}
 		else if ((changeYahooStatus) && ([[object valueForKey:@"NSApplicationName"] isEqualToString:@"Yahoo! Messenger"])) {
-			NSPasteboard * pasteboard = [NSPasteboard generalPasteboard];
+			NSPasteboard * pasteboard = [NSPasteboard pasteboardWithUniqueName];
+
+			[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
 			[pasteboard setString:statusMessage forType:NSStringPboardType];
 			NSPerformService(@"Yahoo! Messenger/Set Selection as Status", pasteboard);
 		}
